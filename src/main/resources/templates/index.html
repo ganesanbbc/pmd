@@ -1,0 +1,20 @@
+<html>
+<body>
+
+<form action="#" th:action="@{/}" th:object="${product}" method="post">
+
+    <table>
+        <tr>
+            <td> Product Name:</td>
+            <td><input type="text" th:field="*{itemName}"/></td>
+            <td th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}">Name Error</td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
