@@ -1,20 +1,17 @@
-package com.cts.day1.task.model;
-
-import com.sun.tools.javadoc.Start;
+package com.cts.day1.project.model;
 
 import javax.persistence.Entity;
 
 @Entity
-public class Task {
+public class Project {
 
     private long id;
 
-    private String taskName;
+    private String name;
 
     private String startDate;
 
     private String endDate;
-
 
     public long getId() {
         return id;
@@ -24,12 +21,12 @@ public class Task {
         this.id = id;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public String getName() {
+        return name;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStartDate() {
@@ -48,4 +45,3 @@ public class Task {
         this.endDate = endDate;
     }
 }
-
