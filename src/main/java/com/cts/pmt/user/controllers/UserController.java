@@ -1,6 +1,7 @@
 package com.cts.pmt.user.controllers;
 
 
+import com.cts.pmt.project.model.Project;
 import com.cts.pmt.user.exception.UserException;
 import com.cts.pmt.user.model.User;
 import com.cts.pmt.user.services.UserService;
@@ -30,20 +31,27 @@ public class UserController {
 
     @RequestMapping(path = "/{id}", method = GET)
     public @ResponseBody
-    ResponseEntity<User> getProduct(@PathVariable("id") long id) throws UserException {
+    ResponseEntity<User> getUser(@PathVariable("id") long id) throws UserException {
         User response = service.getById(id);
         if (response == null) {
-            throw new UserException("Product is not found");
+            throw new UserException("User is not found");
         }
         return new ResponseEntity<User>(response, OK);
     }
 
 
     @PostMapping
-    public List<User> updateItemById(@RequestBody User product) throws UserException {
+    public List<User> updateUser(@RequestBody User product) throws UserException {
         service.save(product);
         return service.getAll();
     }
 
+    @PostMapping(path = "/{id}")
+    public User updateUserInfo(@PathVariable("id") long id, @RequestBody User body) throws UserException {
+        User response = service.getById(id);
+        response.setName(body.getName());
+        service.save(response);
+        return response;
+    }
 
 }

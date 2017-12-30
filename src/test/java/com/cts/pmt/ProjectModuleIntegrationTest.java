@@ -1,4 +1,4 @@
-package com.cts.pmt.user;
+package com.cts.pmt;
 
 
 import com.cts.pmt.ProjectManagementApplication;

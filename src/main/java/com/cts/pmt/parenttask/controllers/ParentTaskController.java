@@ -4,7 +4,6 @@ package com.cts.pmt.parenttask.controllers;
 import com.cts.pmt.parenttask.exception.ParentTaskException;
 import com.cts.pmt.parenttask.model.ParentTask;
 import com.cts.pmt.parenttask.service.ParentTaskService;
-import com.cts.pmt.user.exception.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

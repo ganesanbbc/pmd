@@ -36,7 +36,7 @@ public class ProjectController {
     ResponseEntity<Project> getProduct(@PathVariable("id") long id) throws UserException {
         Project response = service.getById(id);
         if (response == null) {
-            throw new UserException("ParentTask is not found");
+            throw new UserException("Project is not found");
         }
         return new ResponseEntity<Project>(response, OK);
     }
