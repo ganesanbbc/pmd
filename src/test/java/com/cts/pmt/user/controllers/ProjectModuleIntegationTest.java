@@ -22,14 +22,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(classes = ProjectManagementApplication.class)
 @TestPropertySource(locations = "classpath:application-test.yml")
 @ActiveProfiles("test")
-public class ProjecControllerTest {
+public class ProjectModuleIntegationTest {
 
     public static final String GET_PRODUCTS = "/projects";
 
@@ -40,7 +42,7 @@ public class ProjecControllerTest {
     JdbcTemplate template;
 
     @Test
-    public void twoLocations() throws Exception {
+    public void thatGetProjectListWhenRequestingProjects() throws Exception {
 
         byte[] encoded = Files.readAllBytes(Paths.get(new ClassPathResource("project_statements.sql").getFile().getAbsolutePath()));
         String sql = new String(encoded);
@@ -50,12 +52,10 @@ public class ProjecControllerTest {
                 restTemplate.getForEntity(GET_PRODUCTS, Project[].class);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-
         Project[] body = responseEntity.getBody();
         ArrayList<Object> list = new ArrayList(Arrays.asList(body));
 
-        System.out.println(body.length);
-        System.out.println(list);
+        assertThat(list.size(),is(1));
     }
 
 
