@@ -22,9 +22,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
@@ -82,6 +80,16 @@ public class ProjectModuleIntegrationTest {
         assertEquals(HttpStatus.OK, responseEntity1.getStatusCode());
 
         System.out.println(responseEntity1.getBody());
+    }
+
+
+    @Test
+    public void thatGetNotFoundExceptiontWhenRequestingInvalidProjectId() throws Exception {
+
+
+        ResponseEntity<Project> responseEntity1 =
+                restTemplate.getForEntity(GET_PRODUCT_BY_ID + 100, Project.class);
+        assertEquals(HttpStatus.NOT_FOUND, responseEntity1.getStatusCode());
     }
 
 
