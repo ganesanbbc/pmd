@@ -4,6 +4,8 @@ package com.cts.pmt.parenttask.controllers;
 import com.cts.pmt.parenttask.exception.ParentTaskException;
 import com.cts.pmt.parenttask.model.ParentTask;
 import com.cts.pmt.parenttask.service.ParentTaskService;
+import com.cts.pmt.user.exception.UserException;
+import com.cts.pmt.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,5 +47,13 @@ public class ParentTaskController {
         return service.getAll();
     }
 
+    @PostMapping(path = "/{id}")
+    public ParentTask updateInfo(@PathVariable("id") long id,
+                                 @RequestBody ParentTask body) throws UserException {
+        ParentTask response = service.getById(id);
+        response.setName(body.getName());
+        service.save(response);
+        return response;
+    }
 
 }
