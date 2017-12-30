@@ -1,18 +1,29 @@
 package com.cts.pmt.project.model;
 
-import javax.persistence.Entity;
+import com.cts.pmt.task.model.Task;
+import com.cts.pmt.user.model.User;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
+@Table(name = "project")
 public class Project {
 
     private long id;
-
     private String name;
+    private Set<Task> tasks;
+    private Set<User> users;
 
-    private String startDate;
+    public Project() {
+    }
 
-    private String endDate;
+    public Project(String name) {
+        this.name = name;
+    }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
         return id;
     }
@@ -29,19 +40,32 @@ public class Project {
         this.name = name;
     }
 
-    public String getStartDate() {
-        return startDate;
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    public Set<Task> getTasks() {
+        return tasks;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
-    public String getEndDate() {
-        return endDate;
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", tasks=" + tasks +
+                ", users=" + users +
+                '}';
     }
 }

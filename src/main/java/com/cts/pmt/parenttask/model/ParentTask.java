@@ -1,19 +1,29 @@
 package com.cts.pmt.parenttask.model;
 
-import javax.persistence.Entity;
+import com.cts.pmt.task.model.Task;
+
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "parent_task")
 public class ParentTask {
 
     private long id;
+    private String name;
+    private Set<Task> tasks;
 
-    private String taskName;
+    public ParentTask() {
+    }
 
-    private String startDate;
+    public ParentTask(String name) {
+        this.name = name;
+    }
 
-    private String endDate;
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
         return id;
     }
@@ -22,28 +32,31 @@ public class ParentTask {
         this.id = id;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public String getName() {
+        return name;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getStartDate() {
-        return startDate;
+    @OneToMany(mappedBy = "parentTask", cascade = CascadeType.ALL)
+    public Set<Task> getTasks() {
+        return tasks;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    @Override
+    public String toString() {
+        return "ParentTask{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", tasks=" + tasks +
+                '}';
     }
 }
 

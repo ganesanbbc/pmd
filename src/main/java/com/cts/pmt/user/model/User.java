@@ -1,19 +1,30 @@
 package com.cts.pmt.user.model;
 
-import javax.persistence.Entity;
+import com.cts.pmt.project.model.Project;
+import com.cts.pmt.task.model.Task;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
 
     private long id;
-
-    private String firstName;
-    private String lastName;
-    private String role;
-    private String emailId;
-    private String password;
+    private String name;
+    private Set<Task> tasks;
+    private Project project;
 
 
+    public User() {
+    }
+
+    public User(String name) {
+        this.name = name;
+    }
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
         return id;
     }
@@ -22,44 +33,41 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    @OneToMany(mappedBy = "parentTask", cascade = CascadeType.ALL)
+    public Set<Task> getTasks() {
+        return tasks;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
-    public String getRole() {
-        return role;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    public Project getProject() {
+        return project;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", tasks=" + tasks +
+                ", project=" + project +
+                '}';
     }
 }
 

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class RestExceptionHandler {
+public class TaskRestExceptionHandler {
 
     @ExceptionHandler(TaskException.class)
     public ResponseEntity<ErrorResponse> exceptionToDoHandler(Exception ex) {
