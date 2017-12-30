@@ -60,9 +60,6 @@ dependencies {
     }
     testCompile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.2.0'
 
-//    // https://mvnrepository.com/artifact/org.flywaydb.flyway-test-extensions/flyway-spring4-test
-//    compile group: 'org.flywaydb.flyway-test-extensions', name: 'flyway-spring4-test', version: '3.2.1'
-
 }
 
 configurations {

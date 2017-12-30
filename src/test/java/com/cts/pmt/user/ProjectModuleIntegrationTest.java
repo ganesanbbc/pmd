@@ -25,6 +25,7 @@ import java.util.Arrays;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -34,6 +35,7 @@ import static org.junit.Assert.assertThat;
 public class ProjectModuleIntegrationTest {
 
     public static final String GET_PRODUCTS = "/projects";
+    public static final String GET_PRODUCT_BY_ID = "/projects/";
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -53,9 +55,66 @@ public class ProjectModuleIntegrationTest {
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
         Project[] body = responseEntity.getBody();
-        ArrayList<Object> list = new ArrayList(Arrays.asList(body));
+        ArrayList<Project> list = new ArrayList(Arrays.asList(body));
 
-        assertThat(list.size(),is(1));
+        assertTrue(list.size() > 0);
+    }
+
+
+    @Test
+    public void thatGetProjectWhenRequestingProjectById() throws Exception {
+
+        byte[] encoded = Files.readAllBytes(Paths.get(
+                new ClassPathResource("project_statements.sql").getFile().getAbsolutePath()));
+        String sql = new String(encoded);
+        template.execute(sql);
+
+
+        ResponseEntity<Project[]> responseEntity =
+                restTemplate.getForEntity(GET_PRODUCTS, Project[].class);
+        Project[] body = responseEntity.getBody();
+        ArrayList<Project> list = new ArrayList(Arrays.asList(body));
+
+        long id = list.get(0).getId();
+
+        ResponseEntity<Project> responseEntity1 =
+                restTemplate.getForEntity(GET_PRODUCT_BY_ID + id, Project.class);
+        assertEquals(HttpStatus.OK, responseEntity1.getStatusCode());
+
+        System.out.println(responseEntity1.getBody());
+    }
+
+
+    @Test
+    public void thatAddProjectWhenRequestingAddProject() throws Exception {
+
+        Project project = new Project("TestProject");
+        ResponseEntity<Project[]> responseEntity =
+                restTemplate.postForEntity(GET_PRODUCTS, project, Project[].class);
+        Project[] body = responseEntity.getBody();
+        ArrayList<Project> list = new ArrayList(Arrays.asList(body));
+
+        System.out.println(list);
+    }
+
+
+    @Test
+    public void thatUpdateProjectWhenRequestingUpdateProject() throws Exception {
+
+
+        ResponseEntity<Project[]> responseEntity =
+                restTemplate.getForEntity(GET_PRODUCTS, Project[].class);
+        Project[] body = responseEntity.getBody();
+        ArrayList<Project> list = new ArrayList(Arrays.asList(body));
+
+        Project project = list.get(0);
+        project.setName("UpdatedName");
+
+        ResponseEntity<Project> responseEntity1 =
+                restTemplate.postForEntity(GET_PRODUCT_BY_ID + project.getId(), project, Project.class);
+        assertEquals(HttpStatus.OK, responseEntity1.getStatusCode());
+
+        System.out.println(responseEntity1.getBody());
     }
 
 

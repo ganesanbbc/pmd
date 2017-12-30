@@ -43,9 +43,18 @@ public class ProjectController {
 
 
     @PostMapping
-    public List<Project> updateItemById(@RequestBody Project body) throws UserException {
+    public List<Project> addProject(@RequestBody Project body) throws UserException {
         service.save(body);
         return service.getAll();
+    }
+
+
+    @PostMapping(path = "/{id}")
+    public Project updateProject(@PathVariable("id") long id, @RequestBody Project body) throws UserException {
+        Project response = service.getById(id);
+        response.setName(body.getName());
+        service.save(response);
+        return response;
     }
 
 
