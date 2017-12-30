@@ -1,4 +1,4 @@
-package com.cts.pmt.user.controllers;
+package com.cts.pmt.user;
 
 
 import com.cts.pmt.ProjectManagementApplication;
@@ -31,7 +31,7 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(classes = ProjectManagementApplication.class)
 @TestPropertySource(locations = "classpath:application-test.yml")
 @ActiveProfiles("test")
-public class ProjectModuleIntegationTest {
+public class ProjectModuleIntegrationTest {
 
     public static final String GET_PRODUCTS = "/projects";
 
