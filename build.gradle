@@ -1,6 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'jacoco'
+
 
 
 group = 'com.cts1.day1'
@@ -17,10 +19,6 @@ targetCompatibility = 1.8
 repositories {
     mavenCentral()
 }
-
-
-
-
 
 buildscript {
     ext {
@@ -83,4 +81,29 @@ flyway {
     url = 'jdbc:mysql://localhost:3306/pmt'
     user = 'root'
     password = ''
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1'
+}
+
+test {
+    jacoco {
+        append = false
+        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+    }
+}
+
+jacoco {
+    toolVersion = "0.7.6.201602180812"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.enabled true
+        html.destination file("${buildDir}/jacocoHtml")
+    }
 }
