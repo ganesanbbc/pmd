@@ -8,13 +8,10 @@ Create table using flyway : gradle flywayMigrate -i
 
 Testcoverage : Jacoco - gradle clean test jacocoTestReport
 
-Modules:
+# Modules:
 
-User
-
-Project 
-
-ParentTask
-
-Task
+* User
+* Project 
+* ParentTask
+* Task
 
