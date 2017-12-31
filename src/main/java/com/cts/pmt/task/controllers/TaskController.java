@@ -1,6 +1,8 @@
 package com.cts.pmt.task.controllers;
 
 
+import com.cts.pmt.task.exception.TaskException;
+import com.cts.pmt.task.exception.TaskRestExceptionHandler;
 import com.cts.pmt.task.model.Task;
 import com.cts.pmt.task.service.TaskService;
 import com.cts.pmt.user.exception.UserException;
@@ -30,23 +32,23 @@ public class TaskController {
 
     @RequestMapping(path = "/{id}", method = GET)
     public @ResponseBody
-    ResponseEntity<Task> getProduct(@PathVariable("id") long id) throws UserException {
+    ResponseEntity<Task> getProduct(@PathVariable("id") long id) throws TaskException {
         Task response = service.getById(id);
         if (response == null) {
-            throw new UserException("ParentTask is not found");
+            throw new TaskException("Task is not found");
         }
         return new ResponseEntity<Task>(response, OK);
     }
 
 
     @PostMapping
-    public List<Task> updateItemById(@RequestBody Task body) throws UserException {
+    public List<Task> updateItemById(@RequestBody Task body) throws TaskException {
         service.save(body);
         return service.getAll();
     }
 
     @PostMapping(path = "/{id}")
-    public Task updateInfo(@PathVariable("id") long id, @RequestBody Task body) throws UserException {
+    public Task updateInfo(@PathVariable("id") long id, @RequestBody Task body) throws TaskException {
         Task response = service.getById(id);
         response.setName(body.getName());
         service.save(response);

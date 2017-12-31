@@ -7,8 +7,8 @@ public class ErrorResponse {
 
     public ErrorResponse(int errorCode, String errorMessage) {
 
-        this.errorCode = errorCode;
-        this.errorMessage = errorMessage;
+        this.setErrorCode(errorCode);
+        this.setErrorMessage(errorMessage);
     }
 
     public int getErrorCode() {

@@ -11,10 +11,6 @@ public class TaskException extends Exception {
     }
 
 
-    public TaskException() {
-        super();
-    }
-
     @Override
     public String getMessage() {
         return message;

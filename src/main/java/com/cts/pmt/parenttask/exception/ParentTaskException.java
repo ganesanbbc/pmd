@@ -11,10 +11,6 @@ public class ParentTaskException extends Exception {
     }
 
 
-    public ParentTaskException() {
-        super();
-    }
-
     @Override
     public String getMessage() {
         return message;

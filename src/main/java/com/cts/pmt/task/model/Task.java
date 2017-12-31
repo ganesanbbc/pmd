@@ -18,13 +18,8 @@ public class Task {
     public Task() {
     }
 
-    public Task(String name, ParentTask parentTask) {
-        this.name = name;
-        this.parentTask = parentTask;
-    }
 
     public Task(String name) {
-
         this.name = name;
     }
 

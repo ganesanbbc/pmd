@@ -10,11 +10,6 @@ public class ProjectException extends Exception {
         this.message = message;
     }
 
-
-    public ProjectException() {
-        super();
-    }
-
     @Override
     public String getMessage() {
         return message;

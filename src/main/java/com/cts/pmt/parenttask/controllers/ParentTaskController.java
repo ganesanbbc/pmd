@@ -49,7 +49,7 @@ public class ParentTaskController {
 
     @PostMapping(path = "/{id}")
     public ParentTask updateInfo(@PathVariable("id") long id,
-                                 @RequestBody ParentTask body) throws UserException {
+                                 @RequestBody ParentTask body) throws ParentTaskException {
         ParentTask response = service.getById(id);
         response.setName(body.getName());
         service.save(response);

@@ -11,10 +11,6 @@ public class UserException extends Exception {
     }
 
 
-    public UserException() {
-        super();
-    }
-
     @Override
     public String getMessage() {
         return message;

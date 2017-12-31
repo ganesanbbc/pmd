@@ -1,6 +1,7 @@
 package com.cts.pmt.project.controllers;
 
 
+import com.cts.pmt.project.exception.ProjectException;
 import com.cts.pmt.project.model.Project;
 import com.cts.pmt.project.service.ProjectService;
 import com.cts.pmt.user.exception.UserException;
@@ -33,24 +34,24 @@ public class ProjectController {
 
     @RequestMapping(path = "/{id}", method = GET)
     public @ResponseBody
-    ResponseEntity<Project> getProduct(@PathVariable("id") long id) throws UserException {
+    ResponseEntity<Project> getProduct(@PathVariable("id") long id) throws ProjectException {
         Project response = service.getById(id);
         if (response == null) {
-            throw new UserException("Project is not found");
+            throw new ProjectException("Project is not found");
         }
         return new ResponseEntity<Project>(response, OK);
     }
 
 
     @PostMapping
-    public List<Project> addProject(@RequestBody Project body) throws UserException {
+    public List<Project> addProject(@RequestBody Project body) throws ProjectException {
         service.save(body);
         return service.getAll();
     }
 
 
     @PostMapping(path = "/{id}")
-    public Project updateProject(@PathVariable("id") long id, @RequestBody Project body) throws UserException {
+    public Project updateProject(@PathVariable("id") long id, @RequestBody Project body) throws ProjectException {
         Project response = service.getById(id);
         response.setName(body.getName());
         service.save(response);
