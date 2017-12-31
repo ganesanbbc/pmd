@@ -12,6 +12,10 @@ public class Task implements Serializable {
 
     private long id;
     private String name;
+    private String startDate;
+    private String endDate;
+    private String status;
+    private String priority;
     private ParentTask parentTask;
     private Project project;
     private User user;
@@ -72,6 +76,36 @@ public class Task implements Serializable {
         this.name = name;
     }
 
+    public String getStartDate() {
+        return startDate;
+    }
 
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
 }
 

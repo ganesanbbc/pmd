@@ -82,6 +82,7 @@ public class Project implements Serializable {
     }
 
     @OneToMany(mappedBy = "project", cascade = {CascadeType.MERGE, CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JsonBackReference
     public Set<Task> getTasks() {
         return tasks;
     }

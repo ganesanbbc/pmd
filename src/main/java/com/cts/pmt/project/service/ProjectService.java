@@ -25,20 +25,21 @@ public class ProjectService {
     UserRepository userRepository;
 
     public void save(Project item) {
-
-        Set<User> users = new HashSet();
-        for (User user : item.getUsers()) {
-            List<User> byName = userRepository.findByName(user.getName());
-            if (byName != null && byName.size() > 0) {
-                User existingUser = (User) byName.get(0);
-                if (existingUser != null) {
-                    users.add(existingUser);
+        if (item.getUsers() != null) {
+            Set<User> users = new HashSet();
+            for (User user : item.getUsers()) {
+                List<User> byName = userRepository.findByName(user.getName());
+                if (byName != null && byName.size() > 0) {
+                    User existingUser = (User) byName.get(0);
+                    if (existingUser != null) {
+                        users.add(existingUser);
+                    }
+                } else {
+                    users.add(user);
                 }
-            }else{
-                users.add(user);
             }
+            item.setUsers(users);
         }
-        item.setUsers(users);
         repository.save(item);
     }
 
