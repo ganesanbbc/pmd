@@ -98,18 +98,19 @@ public class ProjectModuleIntegrationTest {
     public void thatAddProjectWhenRequestingAddProject() throws Exception {
 
         Project project = new Project("TestProject");
+        project.setName("SomeProjectName");
+        project.setStartDate("12-12-2017");
+        project.setEndDate("22-12-2017");
+        project.setPriority("Small");
+        project.setStatus("Open");
+
         ResponseEntity<Project[]> responseEntity =
                 restTemplate.postForEntity(GET_PRODUCTS, project, Project[].class);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-
-//        Project[] body = responseEntity.getBody();
-//        ArrayList<Project> list = new ArrayList(Arrays.asList(body));
-//
-//        System.out.println(list);
     }
 
     @Test
-    public void thatAddProjectWhenRequestingAddProjectContainsUser() throws Exception {
+    public void thatAddProjectWhenRequestingAddProjectContainsNewUser() throws Exception {
 
         Project project = new Project("TestProject");
         Set<User> users = new HashSet<>();
@@ -119,15 +120,27 @@ public class ProjectModuleIntegrationTest {
                 restTemplate.postForEntity(GET_PRODUCTS, project, Project[].class);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-//        Project[] body = responseEntity.getBody();
-//        ArrayList<Project> list = new ArrayList(Arrays.asList(body));
-//        System.out.println(list);
-//
-//        ResponseEntity<Project[]> responseEntity1 =
-//                restTemplate.getForEntity(GET_PRODUCTS, Project[].class);
-//        Project[] body1 = responseEntity.getBody();
-//        ArrayList<Project> list1 = new ArrayList(Arrays.asList(body));
-//        System.out.println(list1);
+    }
+
+    @Test
+    public void thatAddProjectWhenRequestingAddProjectContainsExistingUser() throws Exception {
+
+        byte[] encoded = Files.readAllBytes(Paths.get(
+                new ClassPathResource("user_statements.sql").getFile().getAbsolutePath()));
+        String sql = new String(encoded);
+        template.execute(sql);
+
+
+
+
+        Project project = new Project("TestProject");
+        Set<User> users = new HashSet<>();
+        users.add(new User("some name"));
+        project.setUsers(users);
+        ResponseEntity<Project[]> responseEntity =
+                restTemplate.postForEntity(GET_PRODUCTS, project, Project[].class);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+
     }
 
 
