@@ -18,6 +18,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 @RequestMapping("/tasks")
+@CrossOrigin
 public class TaskController {
 
 

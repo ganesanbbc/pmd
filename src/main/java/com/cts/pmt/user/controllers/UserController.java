@@ -16,6 +16,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 public class UserController {
 
 

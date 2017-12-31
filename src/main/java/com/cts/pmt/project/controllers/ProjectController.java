@@ -18,6 +18,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 @RequestMapping("/projects")
+@CrossOrigin
 public class ProjectController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
