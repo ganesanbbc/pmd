@@ -21,9 +21,9 @@ public class TaskService {
 
     public Task getById(long id) {
         List<Task> list = repository.findAll();
-        for (Task user : list) {
-            if (user.getId() == id) {
-                return user;
+        for (Task task : list) {
+            if (task.getId() == id) {
+                return task;
             }
         }
         return null;
