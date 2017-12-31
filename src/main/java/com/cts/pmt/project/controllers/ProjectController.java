@@ -28,7 +28,9 @@ public class ProjectController {
     @GetMapping
     public @ResponseBody
     ResponseEntity<List<Project>> getAllProject() {
-        return new ResponseEntity<List<Project>>(service.getAll(), OK);
+        List<Project> all = service.getAll();
+        System.out.println("Reading From::" + all);
+        return new ResponseEntity<List<Project>>(all, OK);
     }
 
 
@@ -44,9 +46,10 @@ public class ProjectController {
 
 
     @PostMapping
-    public List<Project> addProject(@RequestBody Project body) throws ProjectException {
+    public ResponseEntity<List<Project>> addProject(@RequestBody Project body) throws ProjectException {
         service.save(body);
-        return service.getAll();
+        List<Project> all = service.getAll();
+        return new ResponseEntity<List<Project>>(all, OK);
     }
 
 

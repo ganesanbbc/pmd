@@ -2,6 +2,7 @@ package com.cts.pmt.project.service;
 
 import com.cts.pmt.project.dao.ProjectRepository;
 import com.cts.pmt.project.model.Project;
+import com.cts.pmt.user.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class ProjectService {
     }
 
     public Project getById(long id) {
-        List<Project> list = repository.findAll();
+        List<Project> list = (List<Project>) repository.findAll();
         for (Project project : list) {
             if (project.getId() == id) {
                 return project;
@@ -32,6 +33,17 @@ public class ProjectService {
     }
 
     public List<Project> getAll() {
-        return repository.findAll();
+        List<Project> projectList = (List<Project>) repository.findAll();
+
+        for (Project project : projectList) {
+            if (project.getUsers() != null) {
+                for (User user : project.getUsers()) {
+                    user.setProject(null);
+                }
+            }
+
+        }
+
+        return projectList;
     }
 }

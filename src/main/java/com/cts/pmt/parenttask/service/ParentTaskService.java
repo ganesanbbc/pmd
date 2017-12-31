@@ -18,7 +18,7 @@ public class ParentTaskService {
     }
 
     public ParentTask getById(long id) {
-        List<ParentTask> list = repository.findAll();
+        List<ParentTask> list = (List<ParentTask>) repository.findAll();
         for (ParentTask user : list) {
             if (user.getId() == id) {
                 return user;
@@ -28,6 +28,6 @@ public class ParentTaskService {
     }
 
     public List<ParentTask> getAll() {
-        return repository.findAll();
+        return (List<ParentTask>) repository.findAll();
     }
 }

@@ -20,7 +20,7 @@ public class UserServiceImple implements UserService {
 
     @Override
     public User getById(long id) {
-        List<User> list = repository.findAll();
+        List<User> list = (List<User>) repository.findAll();
         for (User user : list) {
             if (user.getId() == id) {
                 return user;
@@ -30,6 +30,6 @@ public class UserServiceImple implements UserService {
     }
 
     public List<User> getAll() {
-        return repository.findAll();
+        return (List<User>) repository.findAll();
     }
 }

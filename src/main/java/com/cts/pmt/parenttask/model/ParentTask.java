@@ -3,12 +3,13 @@ package com.cts.pmt.parenttask.model;
 import com.cts.pmt.task.model.Task;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "parent_task")
-public class ParentTask {
+public class ParentTask implements Serializable {
 
     private long id;
     private String name;
@@ -48,15 +49,6 @@ public class ParentTask {
 
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
-    }
-
-    @Override
-    public String toString() {
-        return "ParentTask{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", tasks=" + tasks +
-                '}';
     }
 }
 

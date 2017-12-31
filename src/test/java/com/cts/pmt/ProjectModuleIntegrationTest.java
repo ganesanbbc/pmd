@@ -3,6 +3,7 @@ package com.cts.pmt;
 
 import com.cts.pmt.ProjectManagementApplication;
 import com.cts.pmt.project.model.Project;
+import com.cts.pmt.user.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -71,10 +74,10 @@ public class ProjectModuleIntegrationTest {
         ResponseEntity<Project[]> responseEntity =
                 restTemplate.getForEntity(GET_PRODUCTS, Project[].class);
         Project[] body = responseEntity.getBody();
+
         ArrayList<Project> list = new ArrayList(Arrays.asList(body));
 
         long id = list.get(0).getId();
-
         ResponseEntity<Project> responseEntity1 =
                 restTemplate.getForEntity(GET_PRODUCT_BY_ID + id, Project.class);
         assertEquals(HttpStatus.OK, responseEntity1.getStatusCode());
@@ -85,8 +88,6 @@ public class ProjectModuleIntegrationTest {
 
     @Test
     public void thatGetNotFoundExceptiontWhenRequestingInvalidProjectId() throws Exception {
-
-
         ResponseEntity<Project> responseEntity1 =
                 restTemplate.getForEntity(GET_PRODUCT_BY_ID + 100, Project.class);
         assertEquals(HttpStatus.NOT_FOUND, responseEntity1.getStatusCode());
@@ -99,11 +100,36 @@ public class ProjectModuleIntegrationTest {
         Project project = new Project("TestProject");
         ResponseEntity<Project[]> responseEntity =
                 restTemplate.postForEntity(GET_PRODUCTS, project, Project[].class);
-        Project[] body = responseEntity.getBody();
-        ArrayList<Project> list = new ArrayList(Arrays.asList(body));
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-        System.out.println(list);
+//        Project[] body = responseEntity.getBody();
+//        ArrayList<Project> list = new ArrayList(Arrays.asList(body));
+//
+//        System.out.println(list);
     }
+
+    @Test
+    public void thatAddProjectWhenRequestingAddProjectContainsUser() throws Exception {
+
+        Project project = new Project("TestProject");
+        Set<User> users = new HashSet<>();
+        users.add(new User("name"));
+        project.setUsers(users);
+        ResponseEntity<Project[]> responseEntity =
+                restTemplate.postForEntity(GET_PRODUCTS, project, Project[].class);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+
+//        Project[] body = responseEntity.getBody();
+//        ArrayList<Project> list = new ArrayList(Arrays.asList(body));
+//        System.out.println(list);
+//
+//        ResponseEntity<Project[]> responseEntity1 =
+//                restTemplate.getForEntity(GET_PRODUCTS, Project[].class);
+//        Project[] body1 = responseEntity.getBody();
+//        ArrayList<Project> list1 = new ArrayList(Arrays.asList(body));
+//        System.out.println(list1);
+    }
+
 
 
     @Test

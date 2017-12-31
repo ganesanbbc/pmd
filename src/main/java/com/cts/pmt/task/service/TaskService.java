@@ -20,7 +20,7 @@ public class TaskService {
     }
 
     public Task getById(long id) {
-        List<Task> list = repository.findAll();
+        List<Task> list = (List<Task>) repository.findAll();
         for (Task task : list) {
             if (task.getId() == id) {
                 return task;
@@ -30,6 +30,6 @@ public class TaskService {
     }
 
     public List<Task> getAll() {
-        return repository.findAll();
+        return (List<Task>) repository.findAll();
     }
 }

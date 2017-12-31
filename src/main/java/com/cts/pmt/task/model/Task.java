@@ -5,9 +5,10 @@ import com.cts.pmt.project.model.Project;
 import com.cts.pmt.user.model.User;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Task {
+public class Task implements Serializable {
 
     private long id;
     private String name;
@@ -23,7 +24,7 @@ public class Task {
         this.name = name;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parent_task_id")
     public ParentTask getParentTask() {
         return parentTask;
@@ -33,7 +34,7 @@ public class Task {
         this.parentTask = parentTask;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id")
     public Project getProject() {
         return project;
@@ -43,7 +44,7 @@ public class Task {
         this.project = project;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
@@ -72,15 +73,5 @@ public class Task {
     }
 
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", parentTask=" + parentTask +
-                ", project=" + project +
-                ", user=" + user +
-                '}';
-    }
 }
 

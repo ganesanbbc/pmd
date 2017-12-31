@@ -2,12 +2,14 @@ package com.cts.pmt.user.model;
 
 import com.cts.pmt.project.model.Project;
 import com.cts.pmt.task.model.Task;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-public class User {
+public class User implements Serializable {
 
     private long id;
     private String name;
@@ -50,8 +52,9 @@ public class User {
         this.tasks = tasks;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id")
+    @JsonBackReference
     public Project getProject() {
         return project;
     }
@@ -60,14 +63,5 @@ public class User {
         this.project = project;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", tasks=" + tasks +
-                ", project=" + project +
-                '}';
-    }
 }
 
