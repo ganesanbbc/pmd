@@ -61,7 +61,8 @@ dependencies {
 }
 
 configurations {
-    all*.exclude module : 'spring-boot-starter-logging'
+
+//    all*.exclude module : 'spring-boot-starter-logging'
 }
 
 buildscript {
