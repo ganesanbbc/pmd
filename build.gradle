@@ -39,6 +39,12 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '1.5.3.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.5.3.RELEASE'
 
+    // https://mvnrepository.com/artifact/org.springframework/spring-aop
+    compile group: 'org.springframework', name: 'spring-aop', version: '2.5.6'
+    // https://mvnrepository.com/artifact/org.aspectj/aspectjweaver
+    compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.8.13'
+
+
     compile group: 'org.kubek2k', name: 'springockito-annotations', version: '1.0.9'
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
 
