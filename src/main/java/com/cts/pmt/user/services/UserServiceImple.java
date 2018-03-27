@@ -29,6 +29,18 @@ public class UserServiceImple implements UserService {
         return null;
     }
 
+    @Override
+    public String doSomething() {
+
+        System.out.println("Doing some business logic.......................");
+        System.out.println("Doing some business logic.......................");
+        System.out.println("Doing some business logic.......................");
+        System.out.println("Doing some business logic.......................");
+        System.out.println("Doing some business logic.......................");
+        System.out.println("Doing some business logic.......................");
+        return "AOP";
+    }
+
     public List<User> getAll() {
         return (List<User>) repository.findAll();
     }

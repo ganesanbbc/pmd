@@ -10,4 +10,6 @@ public interface UserService {
     void save(User product);
 
     User getById(long expectedProductID);
+
+    String doSomething();
 }
