@@ -1,5 +1,6 @@
 package com.cts.pmt.user.services;
 
+import com.cts.pmt.user.TrackTime;
 import com.cts.pmt.user.dao.UserRepository;
 import com.cts.pmt.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class UserServiceImple implements UserService {
         return null;
     }
 
+    @TrackTime
     @Override
     public String doSomething() {
 
